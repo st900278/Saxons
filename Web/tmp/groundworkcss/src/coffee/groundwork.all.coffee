@@ -8,7 +8,7 @@
  *
 ###
 
-# This file is for CodeKit users and joins all of the Groundwork coffeescript 
+# This file is for CodeKit users and joins all of the Groundwork coffeescript
 # files into a single `groundwork.all.js` javascript file
 
 

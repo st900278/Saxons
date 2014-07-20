@@ -1,7 +1,7 @@
 /**
 * HTML5 placeholder polyfill
 * @requires jQuery - tested with 1.6.2 but might as well work with older versions
-* 
+*
 * code: https://github.com/ginader/HTML5-placeholder-polyfill
 * please report issues at: https://github.com/ginader/HTML5-placeholder-polyfill/issues
 *
@@ -11,7 +11,7 @@
 * http://www.gnu.org/licenses/gpl.html
 *
 * Version: 2.0.6
-* 
+*
 */
 
 (function($) {
@@ -123,7 +123,7 @@
                 polyfilled.text(text);
                 return input;
             }
-            
+
             if(label.hasClass(o.options.removeLabelClass)){
                 label.removeClass(o.options.removeLabelClass)
                      .addClass(o.options.hiddenOverrideClass);
@@ -175,14 +175,14 @@
                 $.attrHooks.placeholder = {
                     get: function(elem) {
                         if (elem.nodeName.toLowerCase() === 'input' || elem.nodeName.toLowerCase() === 'textarea') {
-                            if( $(elem).data('placeholder') ){ 
+                            if( $(elem).data('placeholder') ){
                                 // has been polyfilled
                                 return $( $(elem).data('placeholder') ).text();
                             }else{
                                 // native / not yet polyfilled
                                 return $(elem)[0].placeholder;
                             }
-                            
+
                         }else{
                             return undefined;
                         }
@@ -194,7 +194,7 @@
             }
         });
 
-    
+
 
     };
     $(function(){
