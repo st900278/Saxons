@@ -29,7 +29,8 @@ class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r"/", EntryHandler),
-			(r"/json", JsonTestHandler)
+			(r"/json", JsonTestHandler),
+			(r"/static/pack/dictionary.json", EntryHandler)
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
