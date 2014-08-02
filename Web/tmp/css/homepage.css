@@ -1,61 +1,55 @@
-body{
-    font-family: "proxima-nova",sans-serif;
-    font-weight: 400;
-    text-rendering: optimizelegibility;
-    color:black;
+body {
+  font-family: "proxima-nova", sans-serif;
+  text-rendering: optimizelegibility;
+  color: black;
 }
-
-header{
-    height:100px;
-    background-color: #99FF33;
+header {
+  height: 100px;
+  background-color: #eee;
 }
-.padded{
-    padding: 10px;
+.container {
+  margin: 0px auto;
+  max-width: 1200px;
 }
-
-.container{
-    margin:0px auto;
-    max-width:1200px;
+.login {
+  text-align: right;
 }
-
-.login{
-    text-align:right;
+.homepage-register {
+  width: 100%;
+  background-color: #f6f6f6;
+  min-height: 500px;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
-
-.homepage-register{
-    width:100%;
-    background-color: #99FF33;
-    min-height:500px;
-    padding-top:100px;
-    padding-bottom: 100px;
+.wrapper {
+  margin: 0px auto;
+  width: 75%;
+  text-align: center;
 }
-.wrapper{
-    margin:0px auto;
-    max-width:1000px;
-    text-align: center;
+.wrapper h1 {
+  font-weight: bold;
 }
-
-.homepage-intro{
-    width:100%;
-    background-color:white;
-    padding-top:100px;
-    padding-bottom: 100px;
+.homepage-intro {
+  min-height: 440px;
+  width: 100%;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
-
-.homepage-lang-support{
-    width:100%;
-    background-color: #99FF33;
-    padding-top:100px;
-    padding-bottom:100px;
+.homepage-lang-support {
+  width: 100%;
+  background-color: #ddd;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
-.homepage-lang-support tbody td{
-    text-align:center;
+.homepage-lang-support tbody td {
+  text-align: center;
 }
-.homepage-lang-support tfoot td{
-    text-align:right;
+.homepage-lang-support tfoot td {
+  text-align: right;
 }
-footer{
-    min-height:100px;
-    background-color: gray;
+footer {
+  min-height: 100px;
 }
-
+.contact * {
+  line-height: 16px;
+}
