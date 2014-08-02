@@ -1,10 +1,10 @@
 {% extends "base.html" %} {% block content %}
 <div class="info box">
-  <div class="container padded">
+  <div class="padded container">
     <div class="row">
 
       <div class="one fifth padded">
-        <nav class="nav vertical turquoise">
+        <nav class="vertical turquoise nav">
           <ul role="menu" aria-expanded="false">
             <li>
               <button>My Language Packs</button>
@@ -17,21 +17,39 @@
       </div>
 
       <div class="four fifths padded">
+        <nav class="asphalt nav">
+          <ul>
+            <li>
+              <button>Home</button>
+            </li>
+            <li>
+              <button>My Language Packs</button>
+            </li>
+          </ul>
+        </nav>
+
         <div class="row">
-          <nav class="nav asphalt">
-            <ul>
-              <li>
-                <button>Home</button>
-              </li>
-              <li>
-                <button>My Language Packs</button>
-              </li>
-            </ul>
-          </nav>
+          <div class="padded two sevenths skip-four">
+            <form>
+              <input type="search">
+            </form>
+          </div>
+          <div class="padded one sevenths">
+            <a role="button" href="#" rel="search" class="gap-bottom gap-right">Search</a>
+          </div>
         </div>
 
+        <div class="gapped blue box">
+          <div class="triple-pad-top triple-pad-bottom padded row">
+            <div class="three elevenths square error box lang-pack"></div>
+            <div class="three elevenths skip-one box lang-pack"></div>
+            <div class="three elevenths skip-one square question box lang-pack"></div>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
+</div>
 </div>
 {% end %}

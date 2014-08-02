@@ -1,21 +1,35 @@
 import os
 import re
+import json
 
 import tornado.auth
 import tornado.httpserver
-import tornado.ioloop
-import tornado.options 
+import tornado.ioloop 
 import tornado.web
 import torndb
 
-tornado.options.define("port", default="8080")
+from tornado.options import options, define
+
+define("port", default="8080")
+define("mysql_host", default="127.0.0.1:3306")
+define("mysql_database", default="saxons")
+define("mysql_user", default="oberon")
+define("mysql_password", default="creativekit")
 
 
+'''
+,
+            (r"/home", HomeHandler),
+            (r"/help", FeedHandler),
+            (r"/setting", SettingHandler),
+            (r"/auth/login", AuthLoginHandler),
+            (r"/auth/logout", AuthLogoutHandler),
+			'''
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
-            (r"/", EntryHandler)
-            
+            (r"/", EntryHandler),
+			(r"/json", JsonTestHandler)
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
@@ -28,14 +42,12 @@ class Application(tornado.web.Application):
         )
         tornado.web.Application.__init__(self, handlers, **settings)
        
-
-        "connect db"
-        '''
+        
         self.db = torndb.Connection(
             host=options.mysql_host, database=options.mysql_database,
             user=options.mysql_user, password=options.mysql_password)
-
-        '''
+        
+        
 class EntryHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("home.html")
@@ -52,6 +64,7 @@ class BaseHandler(tornado.web.RequestHandler):
 class HomeHandler(BaseHandler):
     def get(self):
         self.render("mainpage.html", user = self.current_user)
+        
 
         
 class LearningProcessHandler(BaseHandler):
@@ -59,6 +72,7 @@ class LearningProcessHandler(BaseHandler):
         if not self.current_user:
             self.redirect("/")
             return
+		
             
             
 class SavePackHandler(BaseHandler):
@@ -66,6 +80,7 @@ class SavePackHandler(BaseHandler):
         if not self.current_user:
             self.redirect("/")
             return
+	
         
 class SettingHandler(BaseHandler):
     def get(self):
@@ -73,22 +88,27 @@ class SettingHandler(BaseHandler):
             self.redirect("/")
             return
         else:
-            '''
-            fetch db
-            self.render("settings.html", user = 
-            '''
-            pass
+			'''
+            self.db.query("select * ")
+            self.render("settings.html")
+			'''
+			pass
     
     
-    
+class JsonTestHandler(tornado.web.RequestHandler):
+	def get(self):
+		data = open("static/pack/dict.json").read()
+		return_json = json.loads(data)
+		
+		self.write(return_json)
     
     
     
     
 def main():
-    tornado.options.parse_command_line()
+    options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(Application())
-    http_server.listen(tornado.options.options.port)
+    http_server.listen(options.port)
     tornado.ioloop.IOLoop.instance().start()
 
 
