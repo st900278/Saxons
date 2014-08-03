@@ -17,7 +17,7 @@ define("port", default="8080")
 define("mysql_host", default="127.0.0.1:3306")
 define("mysql_database", default="saxons")
 define("mysql_user", default="root")
-define("mysql_password", default="creativekit")
+define("mysql_password", default="nodesystem")
 
 
 '''
@@ -34,7 +34,8 @@ class Application(tornado.web.Application):
 	def __init__(self):
 		handlers = [
 			(r"/", EntryHandler),
-			(r"/getword", LangPackBrowseHandler),
+			(r"/publicpack", LangPackBrowseHandler),
+			(r"/getword/(.*)", LangPackContentHandler)
 		]
 		settings = dict(
 			template_path=os.path.join(os.path.dirname(__file__), "templates"),
@@ -102,13 +103,24 @@ class LangPackBrowseHandler(tornado.web.RequestHandler):
 	def get(self):
 		return_list = []
 		for pack in self.application.db.query("select * from public_lang_pack"):
-			return_list.append({'name': pack.name,
-								'publish_date': pack.publish_date,
-								'lang_type': pack.lang_type,
-								'description': pack.description})
+			return_list.append(json.dumps({"name": str(pack.name),
+								"publish_date": str(pack.publish_date),
+								"lang_type": str(pack.lang_type),
+								"description": str(pack.description)}))
 		self.write(str(return_list))
 
 
+class LangPackContentHandler(tornado.web.RequestHandler):
+	def get(self, data):
+		return_list = []
+		for voc in self.application.db.query("select * from %s"% (data)):
+			return_list.append(json.dumps({"word":str(voc.word), "wordnet":str(voc.wordnet), "definition":str(voc.definition)}))
+		self.write(str(return_list))	
+
+class QuizHandler(tornado.web.RequestHandler):
+	def get(self, data):
+		self.write(data)
+		
 def main():
 	options.parse_command_line()
 	http_server = tornado.httpserver.HTTPServer(Application())
