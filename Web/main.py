@@ -34,6 +34,8 @@ class Application(tornado.web.Application):
 	def __init__(self):
 		handlers = [
 			(r"/", EntryHandler),
+			(r"/quiz", TempQuizHandler),
+			(r"/packs", LangPacksHandler),
 			(r"/publicpack", LangPackBrowseHandler),
 			(r"/getword/(.*)", LangPackContentHandler)
 		]
@@ -57,7 +59,14 @@ class EntryHandler(tornado.web.RequestHandler):
 	def get(self):
 		self.render("home.html")
 
+class TempQuizHandler(tornado.web.RequestHandler):
+	def get(self):
+		self.render("quiz.html")
 		
+class LangPacksHandler(tornado.web.RequestHandler):
+	def get(self):
+		self.render("packs.html")
+
 class BaseHandler(tornado.web.RequestHandler):
 	@property
 	def db(self):
